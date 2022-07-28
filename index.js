@@ -18,7 +18,20 @@ app.get("/", function (req, res) {
   res.sendFile(__dirname + "/views/index.html");
 });
 
-// your first API endpoint...
+// Endpoints
+//* Request Header Parser Microservice
+app.get("/api/whoami", function (req, res) {
+  const { ip: ipaddress } = req;
+  const language = req.headers["accept-language"];
+  const software = req.rawHeaders[15];
+  res.json({
+    ipaddress,
+    language,
+    software,
+  });
+});
+
+//* Timestamp Microservice
 app.get("/api/hello", function (req, res) {
   res.json({ greeting: "hello API" });
 });
